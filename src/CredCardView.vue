@@ -5,7 +5,7 @@
         <div class="bg-gray-200 shadow-xl p-6 w-[80%] relative">
           <div
             class="h-[220px] w-[55%] rounded-[25px] shadow-xl absolute -top-[22%] left-[22%]"
-            :class="colorList[1]"
+            :class="colorList[colorSelect]"
           >
             <div class="flex flex-col p-4 justify-center relative">
               <div class="flex items-center">
@@ -53,6 +53,8 @@
                 class="p-2"
                 placeholder="Choose your card number"
                 v-model="cardNumber"
+                maxlength="19"
+                @keyup="formatCard()"
               />
             </div>
             <div class="flex flex-col my-8">
@@ -62,6 +64,7 @@
                 placeholder="Type your name"
                 class="p-2"
                 v-model="cardName"
+                maxlength="20"
               />
             </div>
             <div class="grid grid-cols-3 gap-6">
@@ -109,7 +112,7 @@
               </div>
               <div class="flex flex-col">
                 <label for="" class="block">CVV</label>
-                <input type="text" class="p-2" v-model="cvv" />
+                <input type="text" class="p-2" v-model="cvv" maxlength="3" />
               </div>
             </div>
             <div>
@@ -123,7 +126,7 @@
         </div>
       </div>
       <div>
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center mt-[22%]">
           <div class="mt-16">
             <h1 class="text-6xl font-bold text-[#f0c902] text-start">
               Here<br />
@@ -199,6 +202,46 @@
             />
           </div>
         </div>
+        <div class="flex items-center mt-20">
+          <div>
+            <label for="visa">
+              <img
+                src="src\assets\aproachyes.svg"
+                alt="Card Flag"
+                class="h-[80px] mb-4"
+              />
+            </label>
+          </div>
+          <h2 class="text-white text-2xl ml-6 mb-4">
+            pay by approximation payment
+          </h2>
+        </div>
+        <div class="mt-10">
+          <button
+            class="cardColor001 h-20 w-20 rounded-full ml-6"
+            @click="() => (colorSelect = 0)"
+          ></button>
+          <button
+            class="cardColor002 h-20 w-20 rounded-full ml-6"
+            @click="() => (colorSelect = 1)"
+          ></button>
+          <button
+            class="cardColor003 h-20 w-20 rounded-full ml-6"
+            @click="() => (colorSelect = 2)"
+          ></button>
+          <button
+            class="cardColor004 h-20 w-20 rounded-full ml-6"
+            @click="() => (colorSelect = 3)"
+          ></button>
+          <button
+            class="cardColor005 h-20 w-20 rounded-full ml-6"
+            @click="() => (colorSelect = 4)"
+          ></button>
+          <button
+            class="cardColor006 h-20 w-20 rounded-full ml-6"
+            @click="() => (colorSelect = 5)"
+          ></button>
+        </div>
       </div>
     </div>
   </div>
@@ -213,7 +256,15 @@ const cvv = ref("123");
 const ano = ref(24);
 const mes = ref();
 
-let colorList = ["cardColor001", "cardColor002"];
+let colorList = [
+  "cardColor001",
+  "cardColor002",
+  "cardColor003",
+  "cardColor004",
+  "cardColor005",
+  "cardColor006",
+];
+const colorSelect = ref(0);
 const flagUsed = ref(0);
 const flagPath = ref([
   "src/assets/elo-logo.svg",
@@ -221,6 +272,13 @@ const flagPath = ref([
   "src/assets/mc_symbol.svg",
   "src/assets/visa.png",
 ]);
+
+const formatCard = () => {
+  let nn = cardNumber.value;
+  (nn.length - (nn.split(" ").length - 1)) % 4 === 0
+    ? (cardNumber.value += " ")
+    : "";
+};
 </script>
 
 <style scoped>
@@ -250,6 +308,67 @@ const flagPath = ref([
     to right,
     rgb(127, 3, 131),
     #e000d5
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  box-shadow: -10px 10px 20px 0.22rem #4040407e;
+}
+.cardColor003 {
+  background: #272527; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #272527,
+    #525052
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #272527,
+    #525052
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  box-shadow: -10px 10px 20px 0.22rem #4040407e;
+}
+.cardColor004 {
+  background: #ed0505; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #dda600,
+    #0ad100
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #0046d3,
+    #ea004a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  box-shadow: -10px 10px 20px 0.22rem #4040407e;
+}
+
+.cardColor005 {
+  background: #f9e800; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #a49a01,
+    #f9e800
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #a49a01,
+    #f9e800
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  box-shadow: -10px 10px 20px 0.22rem #4040407e;
+}
+.cardColor006 {
+  background: #ff7a00; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #d06501,
+    #ff7a00
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #d06501,
+    #ff7a00
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   box-shadow: -10px 10px 20px 0.22rem #4040407e;
